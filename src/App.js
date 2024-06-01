@@ -26,22 +26,10 @@ const App = () => {
 
   return (
     <div>
-      <h1>WebSocket Chat</h1>
-      <div>
-        {messages.map((message, index) => (
-          <div key={index}>{message}</div>
-        ))}
-      </div>
-      <input
-        type="text"
-        placeholder="Type a message..."
-        onKeyDown={(e) => {
-          if (e.key === 'Enter') {
-            sendMessage(e.target.value);
-            e.target.value = '';
-          }
-        }}
-      />
+     <h1>Rock Paper Scissors</h1>
+     <button onClick={() => sendMessage('rock')}>Rock</button>
+     <button onClick={() => sendMessage('paper')}>Paper</button>
+     <button onClick={() => sendMessage('scissors')}>Scissors</button>
     </div>
   );
 };
