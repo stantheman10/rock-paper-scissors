@@ -8,6 +8,7 @@ import {
 
 import PlayWithFriend from "./pages/PlayWithFriend";
 import Home from "./pages/Home";
+import PlayWithStranger from "./pages/PlayWithStranger";
 
 
 
@@ -20,6 +21,10 @@ const App = () => {
         />
         <Route path="/play-with-friend"
           element={<PlayWithFriend />}
+        />
+        <Route 
+            path="/play-with-stranger"
+            element={<PlayWithStranger />}
         />
         </Routes>
       
