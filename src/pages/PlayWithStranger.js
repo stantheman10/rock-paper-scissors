@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
+import { FaHandRock, FaHandPaper, FaHandScissors, FaSyncAlt } from 'react-icons/fa';
 
 const socket = io('http://localhost:5000');
 
@@ -14,6 +15,8 @@ const PlayWithStranger = () => {
   const rock = 'rock';
   const paper = 'paper';
   const scissors = 'scissors';
+
+  const refresh = () => window.location.reload(true)
 
   useEffect(() => {
     socket.emit('joinGame');
@@ -55,10 +58,19 @@ const PlayWithStranger = () => {
       <h2 className="text-2xl">Play with a Stranger</h2>
       {!gameStarted && <p>Waiting for an opponent...</p>}
       {gameStarted && (
-        <div className="space-x-4">
-          <button onClick={() => sendMove(rock)} className="bg-gray-200 p-2 rounded">Rock</button>
-          <button onClick={() => sendMove(paper)} className="bg-gray-200 p-2 rounded">Paper</button>
-          <button onClick={() => sendMove(scissors)} className="bg-gray-200 p-2 rounded">Scissors</button>
+        <div className="flex space-x-4">
+          <button onClick={() => sendMove(rock)} className="bg-gray-200 p-2 rounded flex items-center space-x-2">
+            <FaHandRock className="text-xl" /> <span>Rock</span>
+          </button>
+          <button onClick={() => sendMove(paper)} className="bg-gray-200 p-2 rounded flex items-center space-x-2">
+            <FaHandPaper className="text-xl" /> <span>Paper</span>
+          </button>
+          <button onClick={() => sendMove(scissors)} className="bg-gray-200 p-2 rounded flex items-center space-x-2">
+            <FaHandScissors className="text-xl" /> <span>Scissors</span>
+          </button>
+          <button onClick={refresh} className="bg-gray-200 p-2 rounded flex items-center space-x-2">
+            <FaSyncAlt className="text-xl" /> <span>Refresh</span>
+          </button>
         </div>
       )}
       {move && <p>Your move: {move}</p>}
