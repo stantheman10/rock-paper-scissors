@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
-import { FaHandRock, FaHandPaper, FaHandScissors, FaSyncAlt } from 'react-icons/fa'; // Import icons
+import { FaHandRock, FaHandPaper, FaHandScissors, FaSyncAlt } from 'react-icons/fa';
 
 const socket = io('http://localhost:5000');
 
@@ -38,7 +38,7 @@ const PlayWithStranger = () => {
     socket.on('opponentMove', (moves) => {
       const opponentId = Object.keys(moves).find(id => id !== socket.id);
       setOpponentMove(moves[opponentId]);
-      setBothPlayersMoved(true); // Set both players moved when opponent's move is received
+      setBothPlayersMoved(true);
     });
 
     return () => {

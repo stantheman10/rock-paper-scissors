@@ -18,24 +18,17 @@ const publicRooms = [];
 
 const determineWinner = (move1, move2) => {
   if (move1 === move2) {
-    console.log('Draw');
     return 'Draw';
   } else if (move1 === 'rock' && move2 === 'scissors') {
-    console.log('Player 1 wins');
     return 'Player 1 wins';
   } else if (move1 === 'paper' && move2 === 'rock') {
-    console.log('Player 1 wins');
     return 'Player 1 wins';
   } else if (move1 === 'scissors' && move2 === 'paper') {
-    console.log('Player 1 wins');
     return 'Player 1 wins';
   } else {
-    console.log('Player 2 wins');
     return 'Player 2 wins';
   }
 };
-
-
 
 io.on('connection', (socket) => {
   console.log('A user connected');
@@ -69,9 +62,12 @@ io.on('connection', (socket) => {
       if (room.players.every(playerId => io.sockets.sockets.get(playerId).move)) {
         const player1 = io.sockets.sockets.get(room.players[0]);
         const player2 = io.sockets.sockets.get(room.players[1]);
+
+        console.log(`Player 1 move: ${player1.move}`);
+        console.log(`Player 2 move: ${player2.move}`);
+
         const result = determineWinner(player1.move, player2.move);
 
-        
         console.log(`Winner: ${result}`);
 
         io.to(room.id).emit('gameResult', result);
