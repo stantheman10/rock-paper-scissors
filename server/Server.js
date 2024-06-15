@@ -19,11 +19,9 @@ const publicRooms = [];
 const determineWinner = (move1, move2) => {
   if (move1 === move2) {
     return 'Draw';
-  } else if (move1 === 'rock' && move2 === 'scissors') {
-    return 'Player 1 wins';
-  } else if (move1 === 'paper' && move2 === 'rock') {
-    return 'Player 1 wins';
-  } else if (move1 === 'scissors' && move2 === 'paper') {
+  } else if ((move1 === 'rock' && move2 === 'scissors') || 
+             (move1 === 'paper' && move2 === 'rock') || 
+             (move1 === 'scissors' && move2 === 'paper')) {
     return 'Player 1 wins';
   } else {
     return 'Player 2 wins';
@@ -59,6 +57,7 @@ io.on('connection', (socket) => {
     const room = publicRooms.find(room => room.id === socket.roomId);
     if (room) {
       socket.move = move;
+      console.log(`Move set for player ${socket.id}: ${move}`);
       if (room.players.every(playerId => io.sockets.sockets.get(playerId).move)) {
         const player1 = io.sockets.sockets.get(room.players[0]);
         const player2 = io.sockets.sockets.get(room.players[1]);
@@ -70,7 +69,10 @@ io.on('connection', (socket) => {
 
         console.log(`Winner: ${result}`);
 
-        io.to(room.id).emit('gameResult', result);
+        setTimeout(() => {
+          io.to(room.id).emit('gameResult', result);
+        }, 2000);
+
         io.to(room.id).emit('opponentMove', { [room.players[0]]: player1.move, [room.players[1]]: player2.move });
 
         player1.move = null;

@@ -32,7 +32,9 @@ const PlayWithStranger = () => {
     });
 
     socket.on('gameResult', (result) => {
-      setWinner(result);
+      setTimeout(() => {
+        setWinner(result);
+      }, 2000); // Delay before displaying the winner
     });
 
     socket.on('opponentMove', (moves) => {
@@ -78,7 +80,7 @@ const PlayWithStranger = () => {
         </div>
       )}
       {move && <p>Your move: {move}</p>}
-      {opponentMove && <p>Opponent's move: {opponentMove}</p>}
+      
       {gameMessage && <p>{gameMessage}</p>}
       {bothPlayersMoved && winner && <p>Winner: {winner}</p>}
     </div>
