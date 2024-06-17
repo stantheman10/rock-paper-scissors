@@ -11,7 +11,7 @@ import { useParams } from "react-router-dom";
 
 const PlayWithFriend = () => {
   const { roomId } = useParams();
-  const [totalChances,setTotalChances] = useState(3)
+  const [totalChances,setTotalChances] = useState(0)
   const [wins, setWins] = useState(0);
   const [losses, setLosses] = useState(0);
   const [draw, setDraw] = useState(0);
@@ -50,8 +50,10 @@ const PlayWithFriend = () => {
   }
 
   useEffect (()=>{
-    if(totalChances === 3){
+    
 
+    if(totalChances === 3){
+        alert("Game Finished")
     }
 
   },[totalChances])
@@ -62,6 +64,7 @@ const PlayWithFriend = () => {
 
     newSocket.on("connect", () => {
       console.log("Connected to the socket.io server");
+      setTotalChances(0);
     });
 
     newSocket.emit("joinRoom", roomId);
@@ -69,6 +72,7 @@ const PlayWithFriend = () => {
     newSocket.on('startGame', () => {
       console.log('Game has started');
       setPlayerConnected(true);
+      setTimer(10);
     });
 
     newSocket.on('userJoined', (roomUsers) => {
