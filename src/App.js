@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import {
   BrowserRouter,
@@ -19,7 +19,7 @@ const App = () => {
         <Route exact path="/"
           element={<Home />}
         />
-        <Route path="/play-with-friend"
+        <Route path="/play-with-friend/:roomId"
           element={<PlayWithFriend />}
         />
         <Route 
