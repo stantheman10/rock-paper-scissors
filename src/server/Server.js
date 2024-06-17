@@ -58,10 +58,14 @@ io.on('connection', (socket) => {
     });
 
     socket.on('sendChoice', (choice) => {
+      if(choice === null) return;
       console.log(typeof(choice.iconName));
       let name = choice.iconName;
-      io.to(room).emit('opponentChoice', name);
-    });
+      const opponentId = rooms[room].find((id) => id !== socket.id);
+      if (opponentId) {
+        io.to(opponentId).emit('opponentChoice', name);
+      }
+  });
   });
 });
 

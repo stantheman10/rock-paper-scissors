@@ -9,6 +9,7 @@ import {
 import PlayWithFriend from "./pages/PlayWithFriend";
 import Home from "./pages/Home";
 import PlayWithStranger from "./pages/PlayWithStranger";
+import Winner from "./pages/Winner";
 
 
 
@@ -25,6 +26,10 @@ const App = () => {
         <Route 
             path="/play-with-stranger"
             element={<PlayWithStranger />}
+        />
+        <Route
+            path="/check-winner"
+            element={<Winner />}  
         />
         </Routes>
       
