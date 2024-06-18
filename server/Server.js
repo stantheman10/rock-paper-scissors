@@ -71,14 +71,17 @@ io.on('connection', (socket) => {
 
         setTimeout(() => {
           io.to(room.id).emit('gameResult', result);
+          io.to(room.id).emit('opponentMove', { [room.players[0]]: player1.move, [room.players[1]]: player2.move });
+
+          player1.move = null;
+          player2.move = null;
         }, 2000);
-
-        io.to(room.id).emit('opponentMove', { [room.players[0]]: player1.move, [room.players[1]]: player2.move });
-
-        player1.move = null;
-        player2.move = null;
       }
     }
+  });
+
+  socket.on('announceWinner', (winnerId) => {
+    io.to(winnerId).emit('gameWinner', winnerId);
   });
 
   const leaveRoom = (socket) => {
