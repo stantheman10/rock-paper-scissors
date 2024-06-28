@@ -12,3 +12,5 @@
   - Built and maintained the backend server and WebSocket logic.
   - Conducted thorough testing and debugging.
   - Utilized Git for version control and collaboration.
+* Branch friend has the local multiplayer Feature
+* Branch play_with_stranger has Online multiplayer feature
